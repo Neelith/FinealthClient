@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CashMovement } from 'src/app/entities/cash-movement';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-cash-movements-page',
@@ -8,6 +9,8 @@ import { CashMovement } from 'src/app/entities/cash-movement';
 })
 
 export class CashMovementsPageComponent {
+
+  constructor(private dialogService : DialogService){}
 
   onDeleteCashMovement(cashMovementId: number) {
     console.log(cashMovementId);
@@ -18,6 +21,6 @@ export class CashMovementsPageComponent {
   }
 
   onAddCashMovement(){
-    console.log("added");
+    this.dialogService.showAddCashMovementDialog();
   }
 }
