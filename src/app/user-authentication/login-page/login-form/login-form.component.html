@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h3>Welcome back!</h3>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+          required
+        />
+        <mat-error>Please provide a valid email address</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          required
+        />
+        <mat-error>Please provide a valid password</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="form.invalid">Login</button>
+    </form>
+  </mat-card-content>
+</mat-card>

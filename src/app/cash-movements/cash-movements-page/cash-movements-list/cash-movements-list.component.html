@@ -1,0 +1,64 @@
+<div class="add-cashMovement-container">
+  <button
+    class="add-cashMovement-button"
+    mat-icon-button
+    color="primary"
+    aria-label="Edit button"
+    (click)="onAddCashMovement()"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</div>
+
+<mat-grid-list cols="1" rowHeight="fit" class="external-grid-list">
+  <mat-grid-list
+    cols="5"
+    rowHeight="100"
+    *ngFor="let cashMovement of cashMovementList"
+  >
+    <mat-grid-tile>
+      <img
+        class="category-image"
+        matListItemAvatar
+        [src]="cashMovement.iconUrl"
+        alt="cash movement icon"
+    /></mat-grid-tile>
+
+    <mat-grid-tile>
+      <p class="date">
+        {{ cashMovement.date | date : "dd MMM" }}
+      </p></mat-grid-tile
+    >
+
+    <mat-grid-tile>
+      <p>{{ cashMovement.description }}</p></mat-grid-tile
+    >
+
+    <mat-grid-tile
+      ><p class="amount">
+        {{ cashMovement.amount | currency : "EUR" }}
+      </p></mat-grid-tile
+    >
+
+    <mat-grid-tile>
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Edit button"
+        (click)="onEditCashMovement(cashMovement)"
+      >
+        <mat-icon>settings</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Edit button"
+        (click)="onDeleteCashMovement(cashMovement.cashMovementId)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-grid-tile>
+
+    <mat-divider></mat-divider>
+  </mat-grid-list>
+</mat-grid-list>
