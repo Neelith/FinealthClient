@@ -15,6 +15,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { AddCashMovementDialogComponent } from './dialogs/add-cash-movement-dialog/add-cash-movement-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogService } from './services/dialog.service';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [NavbarComponent, AddCashMovementDialogComponent],
@@ -33,6 +34,7 @@ import { DialogService } from './services/dialog.service';
     MatDividerModule,
     MatGridListModule,
     MatDialogModule,
+    MatSelectModule
   ],
   exports: [
     NavbarComponent,
@@ -50,6 +52,7 @@ import { DialogService } from './services/dialog.service';
     MatGridListModule,
     MatDialogModule,
     AddCashMovementDialogComponent,
+    MatSelectModule
   ],
   providers: [DialogService],
 })
