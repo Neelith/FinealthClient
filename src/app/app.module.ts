@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { UserAuthenticationModule } from './user-authentication/user-authentication.module';
 import { SharedModule } from './shared/shared.module';
 import { CashMovementsModule } from './cash-movements/cash-movements.module';
+import { DialogsModule } from './dialogs/dialogs.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CashMovementsModule } from './cash-movements/cash-movements.module';
     AppRoutingModule,
     SharedModule,
     UserAuthenticationModule,
-    CashMovementsModule
+    CashMovementsModule,
+    DialogsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CashMovement } from 'src/app/entities/cash-movement';
+import { Category } from 'src/app/entities/category';
 
 @Component({
   selector: 'app-cash-movements-list',
@@ -13,6 +14,7 @@ export class CashMovementsListComponent {
   @Output() onAddCashMovementEvent = new EventEmitter();
 
   @Input() cashMovementList : CashMovement[] = [];
+  @Input() categories : Category[] = [];
 
   onDeleteCashMovement(cashMovementId : number){
     this.onDeleteCashMovementEvent.emit(cashMovementId);
@@ -24,6 +26,11 @@ export class CashMovementsListComponent {
 
   onAddCashMovement(){
     this.onAddCashMovementEvent.emit();
+  }
+
+  getCategorySrcPath(categoryId : number) : string{
+    const index = this.categories.findIndex(category => category.categoryId === categoryId);
+    return this.categories[index].iconUrl;
   }
 
 }

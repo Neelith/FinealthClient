@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { CashMovementsPageComponent } from './cash-movements-page/cash-movements-page.component';
 import { CashMovementsListComponent } from './cash-movements-page/cash-movements-list/cash-movements-list.component';
+import { DialogsModule } from '../dialogs/dialogs.module';
 
 
 
@@ -13,7 +14,8 @@ import { CashMovementsListComponent } from './cash-movements-page/cash-movements
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    DialogsModule
   ]
 })
 export class CashMovementsModule { }

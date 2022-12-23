@@ -12,13 +12,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { AddCashMovementDialogComponent } from './dialogs/add-cash-movement-dialog/add-cash-movement-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DialogService } from './services/dialog.service';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
-  declarations: [NavbarComponent, AddCashMovementDialogComponent],
+  declarations: [NavbarComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -34,13 +34,16 @@ import {MatSelectModule} from '@angular/material/select';
     MatDividerModule,
     MatGridListModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
   ],
   exports: [
     NavbarComponent,
     MatToolbarModule,
-    MatIconModule,
     BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
@@ -51,9 +54,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatDividerModule,
     MatGridListModule,
     MatDialogModule,
-    AddCashMovementDialogComponent,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
   ],
-  providers: [DialogService],
+  providers: [],
 })
 export class SharedModule {}
