@@ -11,35 +11,44 @@ import { Category } from 'src/app/entities/category';
 export class CashMovementsPageComponent {
   cashMovementList: CashMovement[] = [
     {
-      title: 'Ebay',
       description: 'Vendita vasi fiori pensili',
       date: new Date(2022, 12, 10),
       amount: 200,
       categoryId: 1,
-      cashMovementId: 1
+      cashMovementId: 1,
     },
     {
-      title: 'Amazon',
       description: 'Fiori',
       date: new Date(2022, 1, 8),
       amount: -5.99,
       categoryId: 2,
-      cashMovementId: 2
+      cashMovementId: 2,
     },
     {
-      title: 'Amazon',
       description: 'Pattex millechiodi',
       date: new Date(2021, 5, 18),
       amount: -9.99,
       categoryId: 2,
-      cashMovementId: 3
+      cashMovementId: 3,
     },
   ];
 
-  categories : Category[] = [
-    { categoryId: 1, name: 'Stipendio', iconUrl: '../../../assets/icons/money-profit-icon.png' },
-    { categoryId: 2, name: 'Shopping', iconUrl: '../../../assets/icons/money-lost-icon.png' },
-    { categoryId: 3, name: 'Affitto', iconUrl: '../../../assets/icons/money-lost-icon.png' },
+  categories: Category[] = [
+    {
+      categoryId: 1,
+      name: 'Stipendio',
+      iconUrl: '../../../assets/icons/money-profit-icon.png',
+    },
+    {
+      categoryId: 2,
+      name: 'Shopping',
+      iconUrl: '../../../assets/icons/money-lost-icon.png',
+    },
+    {
+      categoryId: 3,
+      name: 'Affitto',
+      iconUrl: '../../../assets/icons/money-lost-icon.png',
+    },
   ];
 
   constructor(private dialogService: DialogService) {}
@@ -50,7 +59,10 @@ export class CashMovementsPageComponent {
 
   onEditCashMovement(cashMovement: CashMovement) {
     this.dialogService
-      .showEditCashMovementDialog({cashMovement: cashMovement, categories : this.categories})
+      .showEditCashMovementDialog({
+        cashMovement: cashMovement,
+        categories: this.categories,
+      })
       .afterClosed()
       .subscribe({
         next: (form) => {
