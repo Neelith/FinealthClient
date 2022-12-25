@@ -54,7 +54,11 @@ export class CashMovementsPageComponent {
   constructor(private dialogService: DialogService) {}
 
   onDeleteCashMovement(cashMovementId: number) {
-    console.log(cashMovementId);
+    const itemToRemoveIndex = this.cashMovementList.findIndex(
+      (item) => item.cashMovementId === cashMovementId
+    );
+
+    this.cashMovementList.splice(itemToRemoveIndex, 1);
   }
 
   onEditCashMovement(cashMovement: CashMovement) {
