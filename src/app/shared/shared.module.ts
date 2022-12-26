@@ -16,6 +16,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { HttpClientService } from './services/http-client.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -37,6 +39,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatSelectModule,
     MatDatepickerModule,
     MatMomentDateModule,
+    HttpClientModule
   ],
   exports: [
     NavbarComponent,
@@ -57,7 +60,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatSelectModule,
     MatDatepickerModule,
     MatMomentDateModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClientService],
 })
 export class SharedModule {}

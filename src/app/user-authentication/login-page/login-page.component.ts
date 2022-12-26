@@ -4,11 +4,14 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
 
-  onSubmit(form : FormGroup){
+  constructor() {
+  }
+
+  onSubmit(form: FormGroup) {
     console.log(form.get('email')?.value);
   }
 }
