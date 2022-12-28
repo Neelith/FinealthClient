@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CredentialResponse } from 'google-one-tap';
-import { googleOauthConfig } from 'src/app/user-authentication/oauth-config';
+import { googleOpenIdConfig } from 'src/environments/environment';
 
 @Component({
   selector: 'app-google-button',
@@ -17,7 +17,7 @@ export class GoogleButtonComponent implements OnInit {
     window.onGoogleLibraryLoad = () => {
       //@ts-ignore
       google.accounts.id.initialize({
-        client_id: googleOauthConfig.clientId,
+        client_id: googleOpenIdConfig.clientId,
         callback: this.handleCredentialResponse.bind(this),
         auto_select: false,
         cancel_on_tap_outside: true,
