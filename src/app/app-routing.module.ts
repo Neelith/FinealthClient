@@ -5,7 +5,7 @@ import { LoginPageComponent } from './user-authentication/login-page/login-page.
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
-  { path: 'movements', component: CashMovementsPageComponent },
+  { path: 'movements', component: CashMovementsPageComponent }
 ];
 
 @NgModule({
