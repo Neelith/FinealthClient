@@ -6,6 +6,7 @@ import { LoginFormComponent } from './login-page/login-form/login-form.component
 import { SocialLoginComponent } from './login-page/social-login/social-login.component';
 import { AuthenticationService } from './services/authentication.service';
 import { GoogleButtonComponent } from './login-page/social-login/google-button/google-button.component';
+import { LoggedInGuardGuard } from './loggedIn-guard/logged-in-guard.guard';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { GoogleButtonComponent } from './login-page/social-login/google-button/g
     GoogleButtonComponent,
   ],
   imports: [CommonModule, SharedModule],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, LoggedInGuardGuard],
+  exports: []
 })
 export class UserAuthenticationModule {}
