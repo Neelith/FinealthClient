@@ -6,7 +6,6 @@ import { LoginFormComponent } from './login-page/login-form/login-form.component
 import { SocialLoginComponent } from './login-page/social-login/social-login.component';
 import { AuthenticationService } from './services/authentication.service';
 import { GoogleButtonComponent } from './login-page/social-login/google-button/google-button.component';
-import { googleOauthConfig } from './oauth-config';
 
 @NgModule({
   declarations: [

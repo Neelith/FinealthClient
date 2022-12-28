@@ -6,6 +6,7 @@ import { UserAuthenticationModule } from './user-authentication/user-authenticat
 import { SharedModule } from './shared/shared.module';
 import { CashMovementsModule } from './cash-movements/cash-movements.module';
 import { DialogsModule } from './dialogs/dialogs.module';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { DialogsModule } from './dialogs/dialogs.module';
     CashMovementsModule,
     DialogsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,6 @@
-import { Component, NgZone, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CredentialResponse } from 'google-one-tap';
 import { googleOauthConfig } from 'src/app/user-authentication/oauth-config';
-import { AuthenticationService } from 'src/app/user-authentication/services/authentication.service';
 
 @Component({
   selector: 'app-google-button',
@@ -10,11 +8,9 @@ import { AuthenticationService } from 'src/app/user-authentication/services/auth
   styleUrls: ['./google-button.component.scss'],
 })
 export class GoogleButtonComponent implements OnInit {
-  constructor(
-    private router: Router,
-    private authService: AuthenticationService,
-    private ngzone: NgZone
-  ) {}
+  @Output() onHandleCredentialResponseFromGoogleBtn = new EventEmitter<CredentialResponse>();
+
+  constructor() {}
 
   ngOnInit(): void {
     //@ts-ignore
@@ -39,20 +35,7 @@ export class GoogleButtonComponent implements OnInit {
     };
   }
 
-  async handleCredentialResponse(response: CredentialResponse) {
-    await this.authService.loginWithGoogle(response.credential).subscribe(
-      {
-        next : (x) => {
-          debugger;
-          localStorage.setItem('FinealthToken', x.value);
-          this.ngzone.run(() => {
-            this.router.navigate(['/movements']);
-          });
-        },
-        error : (error) => {
-          console.log(error);
-        }
-      }
-    );
+  handleCredentialResponse(response: CredentialResponse) {
+    this.onHandleCredentialResponseFromGoogleBtn.emit(response);
   }
 }

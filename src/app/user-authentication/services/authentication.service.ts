@@ -25,7 +25,7 @@ export class AuthenticationService{
   }
 
   loginWithGoogle(credentials: string) : Observable<any>{
-    const header = new HttpHeaders().set('Content-type', 'application/json');
+    const header = new HttpHeaders().set('Content-type', 'application/json').set('withCredentials', 'true');
     return this.httpClient.loginWithGooglePost(this.backendApiUrl + "/Session/google-callback", credentials, header);
   }
 }
