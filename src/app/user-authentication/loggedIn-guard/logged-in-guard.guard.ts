@@ -26,6 +26,8 @@ export class LoggedInGuardGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+
+    //TODO: check validità token e expire date
     let isUserLoggedIn = this.authenticationService.isLoggedIn();
 
     if (!isUserLoggedIn) {
