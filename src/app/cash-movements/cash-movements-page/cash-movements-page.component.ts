@@ -46,7 +46,7 @@ export class CashMovementsPageComponent implements OnInit {
     private dialogService: DialogService,
     private cashMovementRepository: CashMovementRepositoryService
   ) {
-    this.cashMovementList$ = this.loadCashMovementList();
+    this.cashMovementList$ = this.cashMovementRepository.getAllCashMovements();
   }
 
   ngOnInit(): void {}
@@ -111,13 +111,11 @@ export class CashMovementsPageComponent implements OnInit {
           return EMPTY;
         })
       )
-      .pipe(
-        finalize(() => (this.cashMovementList$ = this.loadCashMovementList()))
-      )
+      .pipe(finalize(() => this.loadCashMovementList()))
       .subscribe();
   }
 
-  loadCashMovementList(): Observable<CashMovement[]> {
-    return this.cashMovementRepository.getAllCashMovements();
+  loadCashMovementList() {
+    this.cashMovementList$ = this.cashMovementRepository.getAllCashMovements();
   }
 }
