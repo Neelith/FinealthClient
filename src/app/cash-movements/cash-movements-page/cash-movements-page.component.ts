@@ -111,44 +111,10 @@ export class CashMovementsPageComponent implements OnInit {
           return EMPTY;
         })
       )
-      .subscribe({
-        next: cashMovementFromDb => {
-          debugger;
-          cashMovementFromDb.cashMovementId = cashMovementFromDb.id;
-        },
-        error: (err) => {
-          debugger;
-          console.error(err);
-        }
-      });
-
-    // this.dialogService
-    //   .showAddCashMovementDialog(this.categories)
-    //   .afterClosed()
-    //   .subscribe({
-    //     next: (form) => {
-    //       if (form.valid) {
-    //         var cashMovement = new CashMovement();
-    //         cashMovement.description = form.value.description;
-    //         cashMovement.amount = form.value.amount;
-    //         cashMovement.categoryId = form.value.categoryId;
-    //         cashMovement.date = form.value.date;
-    //         this.cashMovementRepository.add(cashMovement).subscribe({
-    //           next: (cashMovementFromDb) => {
-    //             debugger;
-    //             cashMovement.cashMovementId = cashMovementFromDb.id;
-    //           },
-    //           error: (err) => {
-    //             console.error(err);
-    //           },
-    //           complete: () => {
-    //             this.cashMovementList$ = this.loadCashMovementList();
-    //           },
-    //         });
-    //       }
-    //     },
-    //     error: (err) => console.error(err),
-    //   });
+      .pipe(
+        finalize(() => (this.cashMovementList$ = this.loadCashMovementList()))
+      )
+      .subscribe();
   }
 
   loadCashMovementList(): Observable<CashMovement[]> {
