@@ -52,10 +52,10 @@ export class CashMovementsPageComponent implements OnInit {
   ngOnInit(): void {}
 
   onDeleteCashMovement(cashMovementId: number) {
-    // const itemToRemoveIndex = this.cashMovementList.findIndex(
-    //   (item) => item.cashMovementId === cashMovementId
-    // );
-    // this.cashMovementList.splice(itemToRemoveIndex, 1);
+    this.cashMovementRepository
+      .deleteCashMovementById(cashMovementId)
+      .pipe(finalize(() => this.loadCashMovementList()))
+      .subscribe();
   }
 
   onEditCashMovement(cashMovement: CashMovement) {
