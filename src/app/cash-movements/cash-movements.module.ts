@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CashMovementsPageComponent } from './cash-movements-page/cash-movements-page.component';
 import { CashMovementsListComponent } from './cash-movements-page/cash-movements-list/cash-movements-list.component';
 import { DialogsModule } from '../dialogs/dialogs.module';
+import { PersistanceModule } from '../persistance/persistance.module';
 
 
 
@@ -15,7 +16,8 @@ import { DialogsModule } from '../dialogs/dialogs.module';
   imports: [
     CommonModule,
     SharedModule,
-    DialogsModule
+    DialogsModule,
+    PersistanceModule
   ]
 })
 export class CashMovementsModule { }

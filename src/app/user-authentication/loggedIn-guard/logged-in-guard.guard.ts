@@ -7,6 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
@@ -26,6 +27,10 @@ export class LoggedInGuardGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+
+    if (environment.bypassAuth) {
+      return true;
+    }
 
     let isUserLoggedIn = this.authenticationService.isLoggedIn();
 

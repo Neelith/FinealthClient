@@ -14,7 +14,7 @@
   <mat-grid-list
     cols="5"
     rowHeight="100"
-    *ngFor="let cashMovement of cashMovementList"
+    *ngFor="let cashMovement of (cashMovementList$ | async)"
   >
     <mat-grid-tile>
       <img

@@ -6,21 +6,21 @@ import { UserAuthenticationModule } from './user-authentication/user-authenticat
 import { SharedModule } from './shared/shared.module';
 import { CashMovementsModule } from './cash-movements/cash-movements.module';
 import { DialogsModule } from './dialogs/dialogs.module';
-import {CookieService} from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
+import { PersistanceModule } from './persistance/persistance.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     UserAuthenticationModule,
     CashMovementsModule,
-    DialogsModule
+    DialogsModule,
+    PersistanceModule,
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

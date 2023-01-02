@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { first, firstValueFrom, Observable } from 'rxjs';
 import { HttpClientService } from 'src/app/shared/services/http-client.service';
 
 @Injectable({
@@ -14,20 +14,20 @@ export class AuthenticationService {
     private cookieService: CookieService
   ) {}
 
-  isLoggedIn(): boolean {
+  async isLoggedIn() {
     let accessToken = this.cookieService.get('Finealth-Auth');
     let accessTokenExist: boolean =
       accessToken && accessToken.length != 0 ? true : false;
     let accessTokenValid: boolean = false;
 
-    this.httpClient.isAccessTokenValid(accessToken).subscribe({
-      next: (response) => {
+    let isAccessTokenValid$ = this.httpClient.isAccessTokenValid(accessToken);
+    await firstValueFrom(isAccessTokenValid$)
+      .then((response) => {
         accessTokenValid = response.accessTokenValid;
-      },
-      error: () => {
+      })
+      .catch(() => {
         console.error('Something went wrong during token validation.');
-      }
-    });
+      });
 
     return accessTokenExist && accessTokenValid;
   }
