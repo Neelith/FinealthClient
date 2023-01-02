@@ -12,6 +12,7 @@ export class CashMovementsListComponent {
   @Output() onDeleteCashMovementEvent = new EventEmitter<number>();
   @Output() onEditCashMovementEvent = new EventEmitter<CashMovement>();
   @Output() onAddCashMovementEvent = new EventEmitter();
+  @Output() onSearchCashMovementsEvent = new EventEmitter();
 
   @Input() cashMovementList$!: Observable<CashMovement[]>;
   @Input() categories: Category[] = [];
@@ -28,6 +29,10 @@ export class CashMovementsListComponent {
 
   onAddCashMovement() {
     this.onAddCashMovementEvent.emit();
+  }
+
+  onSearchCashMovements(data: any) {
+    this.onSearchCashMovementsEvent.emit(data);
   }
 
   getCategorySrcPath(categoryId: number): string {

@@ -1,0 +1,33 @@
+<div class="add-cashMovement-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="picker" [max]="endDateValue">
+      <input
+        matStartDate
+        placeholder="Start date"
+        [formControl]="startDate"
+      />
+      <input matEndDate placeholder="End date" [formControl]="endDate" />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+  <button
+    mat-icon-button
+    color="primary"
+    aria-label="Search button"
+    (click)="onSearchCashMovements()"
+  >
+    <mat-icon>search</mat-icon>
+  </button>
+
+  <button
+    class="add-cashMovement-button"
+    mat-icon-button
+    color="primary"
+    aria-label="Add button"
+    (click)="onAddCashMovement()"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</div>

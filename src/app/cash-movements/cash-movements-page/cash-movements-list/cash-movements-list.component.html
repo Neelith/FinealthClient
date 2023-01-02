@@ -1,20 +1,13 @@
-<div class="add-cashMovement-container">
-  <button
-    class="add-cashMovement-button"
-    mat-icon-button
-    color="primary"
-    aria-label="Edit button"
-    (click)="onAddCashMovement()"
-  >
-    <mat-icon>add_circle</mat-icon>
-  </button>
-</div>
+<app-cash-movements-list-toolbar
+  (onAddCashMovementEvent)="onAddCashMovement()"
+  (onSearchCashMovementsEvent)="onSearchCashMovements($event)"
+></app-cash-movements-list-toolbar>
 
 <mat-grid-list cols="1" rowHeight="fit" class="external-grid-list">
   <mat-grid-list
     cols="5"
     rowHeight="100"
-    *ngFor="let cashMovement of (cashMovementList$ | async)"
+    *ngFor="let cashMovement of cashMovementList$ | async"
   >
     <mat-grid-tile>
       <img

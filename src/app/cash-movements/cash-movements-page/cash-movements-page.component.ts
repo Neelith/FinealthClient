@@ -3,14 +3,14 @@ import { CashMovement } from 'src/app/entities/cash-movement';
 import { DialogService } from 'src/app/dialogs/services/dialog.service';
 import { Category } from 'src/app/entities/category';
 import { CashMovementRepositoryService } from 'src/app/persistance/services/cash-movement-repository.service';
-import { concatMap, EMPTY, finalize, map, Observable, of } from 'rxjs';
+import { concatMap, EMPTY, filter, finalize, map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-cash-movements-page',
   templateUrl: './cash-movements-page.component.html',
   styleUrls: ['./cash-movements-page.component.scss'],
 })
-export class CashMovementsPageComponent implements OnInit {
+export class CashMovementsPageComponent {
   cashMovementList$: Observable<CashMovement[]>;
 
   categories: Category[] = [
@@ -38,7 +38,23 @@ export class CashMovementsPageComponent implements OnInit {
     this.cashMovementList$ = this.cashMovementRepository.getAllCashMovements();
   }
 
-  ngOnInit(): void {}
+  onSearchCashMovements(data: any) {
+    let startDateValue = data.startDate.value;
+    let endDateValue = data.endDate.value;
+
+    this.cashMovementList$ = this.cashMovementRepository
+      .getAllCashMovements()
+      .pipe(
+        filter((cashMovementList) => {
+          return cashMovementList.some((cashMovement) => {
+            return (
+              cashMovement.date! >= startDateValue &&
+              cashMovement.date! <= endDateValue
+            );
+          });
+        })
+      );
+  }
 
   onDeleteCashMovement(cashMovementId: number) {
     this.cashMovementRepository
@@ -68,7 +84,7 @@ export class CashMovementsPageComponent implements OnInit {
             editedCashMovement.date = form.value.date;
             editedCashMovement.cashMovementId = cashMovement.cashMovementId;
           }
-          debugger;
+
           return editedCashMovement;
         }),
         concatMap((cashMovement) => {

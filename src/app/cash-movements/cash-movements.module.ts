@@ -5,13 +5,15 @@ import { CashMovementsPageComponent } from './cash-movements-page/cash-movements
 import { CashMovementsListComponent } from './cash-movements-page/cash-movements-list/cash-movements-list.component';
 import { DialogsModule } from '../dialogs/dialogs.module';
 import { PersistanceModule } from '../persistance/persistance.module';
+import { CashMovementsListToolbarComponent } from './cash-movements-page/cash-movements-list/cash-movements-list-toolbar/cash-movements-list-toolbar.component';
 
 
 
 @NgModule({
   declarations: [
     CashMovementsPageComponent,
-    CashMovementsListComponent
+    CashMovementsListComponent,
+    CashMovementsListToolbarComponent
   ],
   imports: [
     CommonModule,
