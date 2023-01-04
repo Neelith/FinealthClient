@@ -4,6 +4,7 @@ import { DialogService } from 'src/app/dialogs/services/dialog.service';
 import { Category } from 'src/app/entities/category';
 import { CashMovementRepositoryService } from 'src/app/persistance/services/cash-movement-repository.service';
 import { concatMap, EMPTY, filter, finalize, map, Observable, of } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-cash-movements-page',
@@ -39,19 +40,31 @@ export class CashMovementsPageComponent {
   }
 
   onSearchCashMovements(data: any) {
-    let startDateValue = data.startDate.value;
-    let endDateValue = data.endDate.value;
+    let startDateValue = moment(data.startDate.value);
+    let endDateValue = moment(data.endDate.value);
+    endDateValue.hours(23).minutes(59).seconds(59);
 
     this.cashMovementList$ = this.cashMovementRepository
       .getAllCashMovements()
       .pipe(
-        filter((cashMovementList) => {
-          return cashMovementList.some((cashMovement) => {
-            return (
-              cashMovement.date! >= startDateValue &&
-              cashMovement.date! <= endDateValue
-            );
-          });
+        map((cashMovementList) => {
+          let filteredCashMovements: CashMovement[] = [];
+
+          for (const cashMovement of cashMovementList) {
+            let cashMovementDate = moment(cashMovement.date);
+            if (
+              cashMovementDate.isBetween(
+                startDateValue,
+                endDateValue,
+                undefined,
+                '[]'
+              )
+            ) {
+              filteredCashMovements.push(cashMovement);
+            }
+          }
+
+          return filteredCashMovements;
         })
       );
   }
@@ -81,7 +94,7 @@ export class CashMovementsPageComponent {
             editedCashMovement.description = form.value.description;
             editedCashMovement.amount = form.value.amount;
             editedCashMovement.categoryId = form.value.categoryId;
-            editedCashMovement.date = form.value.date;
+            editedCashMovement.date = form.value.date.toString();
             editedCashMovement.cashMovementId = cashMovement.cashMovementId;
           }
 
@@ -112,7 +125,7 @@ export class CashMovementsPageComponent {
             cashMovement.description = form.value.description;
             cashMovement.amount = form.value.amount;
             cashMovement.categoryId = form.value.categoryId;
-            cashMovement.date = form.value.date;
+            cashMovement.date = form.value.date.toString();
             return cashMovement;
           }
 

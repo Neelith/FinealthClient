@@ -29,8 +29,6 @@ export class CashMovementsListToolbarComponent {
   }
 
   onSearchCashMovements() {
-    this.endDateValue.setHours(23, 59, 59);
-
     this.onSearchCashMovementsEvent.emit({
       startDate: this.startDate,
       endDate: this.endDate,
