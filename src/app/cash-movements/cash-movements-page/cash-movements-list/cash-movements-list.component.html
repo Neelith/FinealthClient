@@ -1,6 +1,7 @@
 <app-cash-movements-list-toolbar
   (onAddCashMovementEvent)="onAddCashMovement()"
   (onSearchCashMovementsEvent)="onSearchCashMovements($event)"
+  [categories]="this.categories"
 ></app-cash-movements-list-toolbar>
 
 <mat-grid-list cols="1" rowHeight="fit" class="external-grid-list">

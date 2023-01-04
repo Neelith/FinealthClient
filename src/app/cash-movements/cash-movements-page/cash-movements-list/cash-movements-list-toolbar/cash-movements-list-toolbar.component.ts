@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Category } from 'src/app/entities/category';
 
 @Component({
   selector: 'app-cash-movements-list-toolbar',
@@ -15,6 +16,14 @@ export class CashMovementsListToolbarComponent {
   @Output() onAddCashMovementEvent = new EventEmitter();
   @Output() onSearchCashMovementsEvent = new EventEmitter();
 
+  @Input() categories: Category[] = [];
+  selectedCategory: Category;
+  allCategory: Category = {
+    categoryId: 0,
+    name: 'Tutte',
+    iconUrl: '',
+  };
+
   constructor() {
     this.endDateValue = new Date();
     this.startDateValue = new Date();
@@ -22,6 +31,8 @@ export class CashMovementsListToolbarComponent {
 
     this.startDate = new FormControl(this.startDateValue);
     this.endDate = new FormControl(this.endDateValue);
+
+    this.selectedCategory = this.allCategory;
   }
 
   onAddCashMovement() {
@@ -32,6 +43,7 @@ export class CashMovementsListToolbarComponent {
     this.onSearchCashMovementsEvent.emit({
       startDate: this.startDate,
       endDate: this.endDate,
+      selectedCategory: this.selectedCategory,
     });
   }
 }

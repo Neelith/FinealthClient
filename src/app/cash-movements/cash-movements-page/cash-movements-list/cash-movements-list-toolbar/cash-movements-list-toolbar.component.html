@@ -2,15 +2,22 @@
   <mat-form-field appearance="fill">
     <mat-label>Enter a date range</mat-label>
     <mat-date-range-input [rangePicker]="picker" [max]="endDateValue">
-      <input
-        matStartDate
-        placeholder="Start date"
-        [formControl]="startDate"
-      />
+      <input matStartDate placeholder="Start date" [formControl]="startDate" />
       <input matEndDate placeholder="End date" [formControl]="endDate" />
     </mat-date-range-input>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Select category</mat-label>
+    <mat-select [(value)]="selectedCategory">
+      <mat-option [value]="this.allCategory">{{
+        this.allCategory.name
+      }}</mat-option>
+      <mat-option *ngFor="let category of this.categories" [value]="category">{{
+        category.name
+      }}</mat-option>
+    </mat-select>
   </mat-form-field>
   <button
     mat-icon-button
