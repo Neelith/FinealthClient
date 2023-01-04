@@ -1,4 +1,4 @@
-<div class="add-cashMovement-container">
+<mat-toolbar class="add-cashMovement-container">
   <mat-form-field appearance="fill">
     <mat-label>Enter a date range</mat-label>
     <mat-date-range-input [rangePicker]="picker" [max]="endDateValue">
@@ -8,6 +8,7 @@
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
   </mat-form-field>
+  <span class="spacer"></span>
   <mat-form-field appearance="fill">
     <mat-label>Select category</mat-label>
     <mat-select [(value)]="selectedCategory">
@@ -27,7 +28,7 @@
   >
     <mat-icon>search</mat-icon>
   </button>
-
+  <span class="button-spacer"></span>
   <button
     class="add-cashMovement-button"
     mat-icon-button
@@ -37,4 +38,4 @@
   >
     <mat-icon>add_circle</mat-icon>
   </button>
-</div>
+</mat-toolbar>

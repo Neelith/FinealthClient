@@ -74,6 +74,7 @@ export class CashMovementsPageComponent {
                 undefined,
                 '[]'
               ) &&
+              data.selectedCategory.categoryId !== 0 &&
               data.selectedCategory.categoryId === cashMovement.categoryId
             ) {
               filteredCashMovements.push(cashMovement);

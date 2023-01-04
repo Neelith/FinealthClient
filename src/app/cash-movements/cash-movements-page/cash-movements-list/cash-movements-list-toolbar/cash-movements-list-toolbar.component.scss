@@ -1,15 +1,16 @@
-.add-cashMovement-container{
-  display: inline-block;
+mat-toolbar {
+  flex: 1 1 auto;
   margin-top: 5%;
   margin-left: 15%;
   margin-right: 15%;
   width: 70%;
+  height: 15%;
 }
 
-.add-cashMovement-button{
-  float: right;
+.spacer{
+  width: 5px;
 }
 
-mat-form-field{
-  
+.button-spacer{
+  flex: 1 1 auto;
 }
