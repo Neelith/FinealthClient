@@ -51,7 +51,7 @@ export class CashMovementsPageComponent {
           let filteredCashMovements: CashMovement[] = [];
 
           for (const cashMovement of cashMovementList) {
-            let cashMovementDate = moment(cashMovement.date);
+            let cashMovementDate = moment(cashMovement.date, "ddd MMM DD YYYY HH:mm:ss");
             if (
               cashMovementDate.isBetween(
                 startDateValue,

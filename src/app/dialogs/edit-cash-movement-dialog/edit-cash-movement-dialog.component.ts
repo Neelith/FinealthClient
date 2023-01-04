@@ -27,7 +27,7 @@ export class EditCashMovementDialogComponent {
       categoryId: new FormControl(data.cashMovement.categoryId, [
         Validators.required,
       ]),
-      date: new FormControl(moment(data.cashMovement.date), [Validators.required]),
+      date: new FormControl(moment(data.cashMovement.date, "ddd MMM DD YYYY HH:mm:ss"), [Validators.required]),
     });
   }
 
