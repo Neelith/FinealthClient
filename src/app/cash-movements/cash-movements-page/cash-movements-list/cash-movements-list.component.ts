@@ -17,7 +17,7 @@ export class CashMovementsListComponent {
 
   @Input() cashMovementList$!: Observable<CashMovement[]>;
   @Input() categories: Category[] = [];
-  @Input() isCashMovementSearchFiltered! : boolean;
+  @Input() isCashMovementSearchFiltered!: boolean;
 
   constructor() {}
 
@@ -41,15 +41,11 @@ export class CashMovementsListComponent {
     this.onReloadCashMovementsEvent.emit();
   }
 
-  getCategorySrcPath(categoryId: number): string {
+  getCategoryById(categoryId: number): Category {
     const index = this.categories.findIndex(
       (category) => category.categoryId === categoryId
     );
 
-    if (index === -1) {
-      return '';
-    }
-
-    return this.categories[index].iconUrl;
+    return this.categories[index];
   }
 }

@@ -8,7 +8,7 @@
 
 <mat-grid-list cols="1" rowHeight="fit" class="external-grid-list">
   <mat-grid-list
-    cols="5"
+    cols="6"
     rowHeight="100"
     *ngFor="let cashMovement of cashMovementList$ | async"
   >
@@ -16,9 +16,15 @@
       <img
         class="category-image"
         matListItemAvatar
-        [src]="getCategorySrcPath(cashMovement.categoryId)"
+        [src]="getCategoryById(cashMovement.categoryId).iconUrl"
         alt="cash movement icon"
     /></mat-grid-tile>
+
+    <mat-grid-tile>
+      <p>
+        {{ getCategoryById(this.cashMovement.categoryId).name }}
+      </p></mat-grid-tile
+    >
 
     <mat-grid-tile>
       <p class="date">
