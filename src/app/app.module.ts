@@ -8,6 +8,7 @@ import { CashMovementsModule } from './cash-movements/cash-movements.module';
 import { DialogsModule } from './dialogs/dialogs.module';
 import { CookieService } from 'ngx-cookie-service';
 import { PersistanceModule } from './persistance/persistance.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { PersistanceModule } from './persistance/persistance.module';
     CashMovementsModule,
     DialogsModule,
     PersistanceModule,
+    CategoriesModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

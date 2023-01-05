@@ -1,0 +1,36 @@
+<app-categories-list-toolbar
+  (onAddCategoryEvent)="onAddCategory()"
+></app-categories-list-toolbar>
+
+<mat-grid-list cols="1" rowHeight="fit" class="external-grid-list">
+  <mat-grid-list
+    cols="3"
+    rowHeight="100"
+    *ngFor="let category of categories$ | async"
+  >
+    <mat-grid-tile>
+      <img
+        class="category-image"
+        matListItemAvatar
+        [src]="getCategorySrcPath(category.categoryId)"
+        alt="category icon"
+    /></mat-grid-tile>
+
+    <mat-grid-tile>
+      <p>{{ category.name }}</p></mat-grid-tile
+    >
+
+    <mat-grid-tile>
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Edit button"
+        (click)="onEditCategory(category)"
+      >
+        <mat-icon>settings</mat-icon>
+      </button>
+    </mat-grid-tile>
+
+    <mat-divider></mat-divider>
+  </mat-grid-list>
+</mat-grid-list>
