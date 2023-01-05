@@ -13,6 +13,7 @@ import * as moment from 'moment';
 })
 export class CashMovementsPageComponent {
   cashMovementList$: Observable<CashMovement[]>;
+  isCashMovementSearchFiltered : boolean = false;
 
   categories: Category[] = [
     {
@@ -39,7 +40,13 @@ export class CashMovementsPageComponent {
     this.cashMovementList$ = this.cashMovementRepository.getAllCashMovements();
   }
 
+  onReloadCashMovements() {
+    this.isCashMovementSearchFiltered = false;
+    this.cashMovementList$ = this.cashMovementRepository.getAllCashMovements();
+  }
+
   onSearchCashMovements(data: any) {
+    this.isCashMovementSearchFiltered = true;
     let startDateValue = moment(data.startDate.value);
     let endDateValue = moment(data.endDate.value);
     endDateValue.hours(23).minutes(59).seconds(59);

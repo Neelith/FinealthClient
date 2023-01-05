@@ -13,9 +13,11 @@ export class CashMovementsListComponent {
   @Output() onEditCashMovementEvent = new EventEmitter<CashMovement>();
   @Output() onAddCashMovementEvent = new EventEmitter();
   @Output() onSearchCashMovementsEvent = new EventEmitter();
+  @Output() onReloadCashMovementsEvent = new EventEmitter();
 
   @Input() cashMovementList$!: Observable<CashMovement[]>;
   @Input() categories: Category[] = [];
+  @Input() isCashMovementSearchFiltered! : boolean;
 
   constructor() {}
 
@@ -33,6 +35,10 @@ export class CashMovementsListComponent {
 
   onSearchCashMovements(data: any) {
     this.onSearchCashMovementsEvent.emit(data);
+  }
+
+  onReloadCashMovements() {
+    this.onReloadCashMovementsEvent.emit();
   }
 
   getCategorySrcPath(categoryId: number): string {

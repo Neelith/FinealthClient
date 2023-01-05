@@ -15,7 +15,9 @@ export class CashMovementsListToolbarComponent {
 
   @Output() onAddCashMovementEvent = new EventEmitter();
   @Output() onSearchCashMovementsEvent = new EventEmitter();
+  @Output() onReloadCashMovementsEvent = new EventEmitter();
 
+  @Input() isCashMovementSearchFiltered!: boolean;
   @Input() categories: Category[] = [];
   selectedCategory: Category;
   allCategory: Category = {
@@ -45,5 +47,9 @@ export class CashMovementsListToolbarComponent {
       endDate: this.endDate,
       selectedCategory: this.selectedCategory,
     });
+  }
+
+  onReloadCashMovements() {
+    this.onReloadCashMovementsEvent.emit();
   }
 }

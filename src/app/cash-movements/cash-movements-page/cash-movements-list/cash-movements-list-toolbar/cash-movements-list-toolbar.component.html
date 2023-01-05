@@ -28,6 +28,14 @@
   >
     <mat-icon>search</mat-icon>
   </button>
+  <button *ngIf="this.isCashMovementSearchFiltered"
+    mat-icon-button
+    color="primary"
+    aria-label="Reload button"
+    (click)="onReloadCashMovements()"
+  >
+    <mat-icon>refresh</mat-icon>
+  </button>
   <span class="button-spacer"></span>
   <button
     class="add-cashMovement-button"
