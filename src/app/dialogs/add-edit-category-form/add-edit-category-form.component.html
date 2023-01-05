@@ -7,11 +7,13 @@
     <mat-form-field appearance="fill">
       <mat-label>Icon</mat-label>
       <mat-select name="iconUrl" formControlName="iconUrl">
-        <mat-option
-          *ngFor="let icon of iconUrls"
-          [value]="icon"
-        >
-          {{ icon }}
+        <mat-option *ngFor="let icon of iconUrls" [value]="icon">
+          <img
+            class="category-image"
+            matListItemAvatar
+            [src]="icon"
+            alt="category icon"
+          />
         </mat-option>
       </mat-select>
     </mat-form-field>
