@@ -12,10 +12,6 @@ export class CategoriesListComponent {
   @Output() onAddCategoryEvent = new EventEmitter();
   @Output() onEditCategoryEvent = new EventEmitter<Category>();
 
-  getCategorySrcPath(categoryId: number): string {
-    return '';
-  }
-
   onAddCategory() {
     this.onAddCategoryEvent.emit();
   }

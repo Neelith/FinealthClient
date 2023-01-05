@@ -16,11 +16,26 @@ export class CategoriesPageComponent {
   }
 
   onAddCategory() {
-    let category = new Category();
-    category.name = 'Test';
-    category.iconUrl = '';
+    let categories : Category[] = [
+      {
+        categoryId: 1,
+        name: 'Stipendio',
+        iconUrl: '../../../assets/icons/money-profit-icon.png',
+      },
+      {
+        categoryId: 2,
+        name: 'Shopping',
+        iconUrl: '../../../assets/icons/money-lost-icon.png',
+      },
+      {
+        categoryId: 3,
+        name: 'Affitto',
+        iconUrl: '../../../assets/icons/money-lost-icon.png',
+      },
+    ];
 
-    this.categoryRepository
+    for (const category of categories) {
+      this.categoryRepository
       .add(category)
       .pipe(
         finalize(() => {
@@ -28,6 +43,7 @@ export class CategoriesPageComponent {
         })
       )
       .subscribe();
+    }
   }
 
   onEditCategory(category: Category) {
