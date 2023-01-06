@@ -66,28 +66,37 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-
-    // let categories: Category[] = [
-    //   {
-    //     categoryId: 4,
-    //     name: 'Amazon',
-    //     iconUrl: '../../../assets/icons/money-lost-icon.png',
-    //   },
-    // ];
-
-    // for (const category of categories) {
-    //   this.categoryRepository
-    //     .add(category)
-    //     .pipe(
-    //       finalize(() => {
-    //         this.categories$ = this.categoryRepository.getAllCategories();
-    //       })
-    //     )
-    //     .subscribe();
-    // }
   }
 
   onEditCategory(category: Category) {
-    console.log(category);
+    this.subscription.add(
+      this.dialogService
+        .showEditCategoryDialog({ iconUrls: this.iconUrls, category: category })
+        .afterClosed()
+        .pipe(
+          map((form) => {
+            let editedCategory: Category | null = null;
+
+            if (form.valid) {
+              editedCategory = new Category();
+              editedCategory.name = form.value.name;
+              editedCategory.iconUrl = form.value.iconUrl;
+              editedCategory.categoryId = category.categoryId;
+            }
+
+            return editedCategory;
+          }),
+          concatMap((category) => {
+            if (category !== null) {
+              return this.categoryRepository.edit(category);
+            }
+            return EMPTY;
+          }),
+          finalize(() => {
+            this.categories$ = this.categoryRepository.getAllCategories();
+          })
+        )
+        .subscribe()
+    );
   }
 }

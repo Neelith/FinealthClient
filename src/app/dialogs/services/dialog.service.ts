@@ -4,6 +4,7 @@ import { Category } from 'src/app/entities/category';
 import { AddCashMovementDialogComponent } from '../add-cash-movement-dialog/add-cash-movement-dialog.component';
 import { AddCategoryDialogComponent } from '../add-category-dialog/add-category-dialog.component';
 import { EditCashMovementDialogComponent } from '../edit-cash-movement-dialog/edit-cash-movement-dialog.component';
+import { EditCategoryDialogComponent } from '../edit-category-dialog/edit-category-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,9 @@ export class DialogService {
 
   public showAddCategoryDialog(data : any) {
     return this.openDialogWithData(AddCategoryDialogComponent, data);
+  }
+
+  public showEditCategoryDialog(data : any) {
+    return this.openDialogWithData(EditCategoryDialogComponent, data);
   }
 }
