@@ -15,6 +15,14 @@ export class NavbarComponent {
   }
 
   onHomeIconClick(){
+    this.router.navigateByUrl("/");
+  }
+
+  onMovementsIconClick(){
     this.router.navigateByUrl("/movements");
+  }
+
+  onCategoriesIconClick(){
+    this.router.navigateByUrl("/categories");
   }
 }

@@ -1,111 +1,185 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CashMovement } from 'src/app/entities/cash-movement';
 import { DialogService } from 'src/app/dialogs/services/dialog.service';
 import { Category } from 'src/app/entities/category';
+import { CashMovementRepositoryService } from 'src/app/persistance/services/cash-movement-repository.service';
+import {
+  concatMap,
+  EMPTY,
+  finalize,
+  map,
+  Observable,
+  of,
+  Subscription,
+} from 'rxjs';
+import * as moment from 'moment';
+import { CategoryRepositoryService } from 'src/app/persistance/services/category-repository.service';
 
 @Component({
   selector: 'app-cash-movements-page',
   templateUrl: './cash-movements-page.component.html',
   styleUrls: ['./cash-movements-page.component.scss'],
 })
-export class CashMovementsPageComponent {
-  cashMovementList: CashMovement[] = [
-    {
-      description: 'Vendita vasi fiori pensili',
-      date: new Date(2022, 12, 10),
-      amount: 200,
-      categoryId: 1,
-      cashMovementId: 1,
-    },
-    {
-      description: 'Fiori',
-      date: new Date(2022, 1, 8),
-      amount: -5.99,
-      categoryId: 2,
-      cashMovementId: 2,
-    },
-    {
-      description: 'Pattex millechiodi',
-      date: new Date(2021, 5, 18),
-      amount: -9.99,
-      categoryId: 2,
-      cashMovementId: 3,
-    },
-  ];
+export class CashMovementsPageComponent implements OnInit, OnDestroy {
+  cashMovementList$!: Observable<CashMovement[]>;
+  isCashMovementSearchFiltered: boolean = false;
+  categories: Category[] = [];
+  subscription: Subscription = new Subscription();
 
-  categories: Category[] = [
-    {
-      categoryId: 1,
-      name: 'Stipendio',
-      iconUrl: '../../../assets/icons/money-profit-icon.png',
-    },
-    {
-      categoryId: 2,
-      name: 'Shopping',
-      iconUrl: '../../../assets/icons/money-lost-icon.png',
-    },
-    {
-      categoryId: 3,
-      name: 'Affitto',
-      iconUrl: '../../../assets/icons/money-lost-icon.png',
-    },
-  ];
+  constructor(
+    private dialogService: DialogService,
+    private cashMovementRepository: CashMovementRepositoryService,
+    private categoryRepository: CategoryRepositoryService
+  ) {}
+  
+  ngOnInit(): void {
+    this.cashMovementList$ = this.cashMovementRepository.getAllCashMovements();
 
-  constructor(private dialogService: DialogService) {}
+    this.subscription.add(
+      this.categoryRepository
+        .getAllCategories()
+        .subscribe((categories) => (this.categories = categories))
+    );
+  }
+
+  onReloadCashMovements() {
+    this.isCashMovementSearchFiltered = false;
+    this.cashMovementList$ = this.cashMovementRepository.getAllCashMovements();
+  }
+
+  onSearchCashMovements(data: any) {
+    this.isCashMovementSearchFiltered = true;
+    let startDateValue = moment(data.startDate.value);
+    let endDateValue = moment(data.endDate.value);
+    endDateValue.hours(23).minutes(59).seconds(59);
+
+    this.cashMovementList$ = this.cashMovementRepository
+      .getAllCashMovements()
+      .pipe(
+        map((cashMovementList) => {
+          let filteredCashMovements: CashMovement[] = [];
+
+          for (const cashMovement of cashMovementList) {
+            let cashMovementDate = moment(
+              cashMovement.date,
+              'ddd MMM DD YYYY HH:mm:ss'
+            );
+            if (
+              cashMovementDate.isBetween(
+                startDateValue,
+                endDateValue,
+                undefined,
+                '[]'
+              ) &&
+              data.selectedCategory.categoryId === 0
+            ) {
+              filteredCashMovements.push(cashMovement);
+            }
+
+            if (
+              cashMovementDate.isBetween(
+                startDateValue,
+                endDateValue,
+                undefined,
+                '[]'
+              ) &&
+              data.selectedCategory.categoryId !== 0 &&
+              data.selectedCategory.categoryId === cashMovement.categoryId
+            ) {
+              filteredCashMovements.push(cashMovement);
+            }
+          }
+
+          return filteredCashMovements;
+        })
+      );
+  }
 
   onDeleteCashMovement(cashMovementId: number) {
-    const itemToRemoveIndex = this.cashMovementList.findIndex(
-      (item) => item.cashMovementId === cashMovementId
+    this.subscription.add(
+      this.cashMovementRepository
+        .deleteCashMovementById(cashMovementId)
+        .subscribe(
+          (cashMovementListFromDb) =>
+            (this.cashMovementList$ = of(cashMovementListFromDb))
+        )
     );
-
-    this.cashMovementList.splice(itemToRemoveIndex, 1);
   }
 
   onEditCashMovement(cashMovement: CashMovement) {
-    this.dialogService
-      .showEditCashMovementDialog({
-        cashMovement: cashMovement,
-        categories: this.categories,
-      })
-      .afterClosed()
-      .subscribe({
-        next: (form) => {
-          if (form.valid) {
-            var newCashMovement = new CashMovement();
-            newCashMovement.description = form.value.description;
-            newCashMovement.amount = form.value.amount;
-            newCashMovement.categoryId = form.value.categoryId;
-            newCashMovement.date = form.value.date;
-            newCashMovement.cashMovementId = cashMovement.cashMovementId;
+    this.subscription.add(
+      this.dialogService
+        .showEditCashMovementDialog({
+          cashMovement: cashMovement,
+          categories: this.categories,
+        })
+        .afterClosed()
+        .pipe(
+          map((form) => {
+            let editedCashMovement: CashMovement | null = null;
 
-            const itemToRemoveIndex = this.cashMovementList.findIndex(
-              (item) => item.cashMovementId === cashMovement.cashMovementId
-            );
+            if (form.valid) {
+              editedCashMovement = new CashMovement();
+              editedCashMovement.description = form.value.description;
+              editedCashMovement.amount = form.value.amount;
+              editedCashMovement.categoryId = form.value.categoryId;
+              editedCashMovement.date = form.value.date.toString();
+              editedCashMovement.cashMovementId = cashMovement.cashMovementId;
+            }
 
-            this.cashMovementList.splice(itemToRemoveIndex, 1, newCashMovement);
-          }
-        },
-        error: (err) => console.error(err),
-      });
+            return editedCashMovement;
+          }),
+          concatMap((cashMovement) => {
+            if (cashMovement !== null) {
+              return this.cashMovementRepository.edit(cashMovement);
+            }
+
+            return EMPTY;
+          })
+        )
+        .pipe(finalize(() => this.loadCashMovementList()))
+        .subscribe()
+    );
   }
 
   onAddCashMovement() {
-    this.dialogService
-      .showAddCashMovementDialog(this.categories)
-      .afterClosed()
-      .subscribe({
-        next: (form) => {
-          if (form.valid) {
-            var cashMovement = new CashMovement();
-            cashMovement.description = form.value.description;
-            cashMovement.amount = form.value.amount;
-            cashMovement.categoryId = form.value.categoryId;
-            cashMovement.date = form.value.date;
+    this.subscription.add(
+      this.dialogService
+        .showAddCashMovementDialog(this.categories)
+        .afterClosed()
+        .pipe(
+          map((form) => {
+            let cashMovement: CashMovement | null = null;
 
-            this.cashMovementList.push(cashMovement);
-          }
-        },
-        error: (err) => console.error(err),
-      });
+            if (form.valid) {
+              cashMovement = new CashMovement();
+              cashMovement.description = form.value.description;
+              cashMovement.amount = form.value.amount;
+              cashMovement.categoryId = form.value.categoryId;
+              cashMovement.date = form.value.date.toString();
+              return cashMovement;
+            }
+
+            return cashMovement;
+          }),
+          concatMap((cashMovement) => {
+            if (cashMovement !== null) {
+              return this.cashMovementRepository.add(cashMovement);
+            }
+
+            return EMPTY;
+          })
+        )
+        .pipe(finalize(() => this.loadCashMovementList()))
+        .subscribe()
+    );
+  }
+
+  loadCashMovementList() {
+    this.cashMovementList$ = this.cashMovementRepository.getAllCashMovements();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

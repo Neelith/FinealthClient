@@ -5,6 +5,9 @@ import { DialogService } from './services/dialog.service';
 import { AddCashMovementDialogComponent } from './add-cash-movement-dialog/add-cash-movement-dialog.component';
 import { EditCashMovementDialogComponent } from './edit-cash-movement-dialog/edit-cash-movement-dialog.component';
 import { AddEditCashMovementFormComponent } from './add-edit-cash-movement-form/add-edit-cash-movement-form.component';
+import { AddCategoryDialogComponent } from './add-category-dialog/add-category-dialog.component';
+import { EditCategoryDialogComponent } from './edit-category-dialog/edit-category-dialog.component';
+import { AddEditCategoryFormComponent } from './add-edit-category-form/add-edit-category-form.component';
 
 
 
@@ -12,7 +15,10 @@ import { AddEditCashMovementFormComponent } from './add-edit-cash-movement-form/
   declarations: [
     AddCashMovementDialogComponent,
     EditCashMovementDialogComponent,
-    AddEditCashMovementFormComponent
+    AddEditCashMovementFormComponent,
+    AddCategoryDialogComponent,
+    EditCategoryDialogComponent,
+    AddEditCategoryFormComponent
   ],
   imports: [
     CommonModule,

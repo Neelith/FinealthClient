@@ -1,5 +1,5 @@
 export class Category {
-  public categoryId : number = 0;
+  public categoryId! : number;
   public name : string = '';
   public iconUrl : string = '';
 

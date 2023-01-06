@@ -1,0 +1,33 @@
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Icon</mat-label>
+      <mat-select name="iconUrl" formControlName="iconUrl">
+        <mat-option *ngFor="let icon of iconUrls" [value]="icon">
+          <img
+            class="category-image"
+            matListItemAvatar
+            [src]="icon"
+            alt="category icon"
+          />
+          <p class="categoy-text">{{getIconLabel(icon)}}</p>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="onSubmitFormEvent()"
+  >
+    {{ submitButtonText }}
+  </button>
+</div>

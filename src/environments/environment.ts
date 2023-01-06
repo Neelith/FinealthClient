@@ -1,6 +1,7 @@
 export const environment = {
   production : false,
-  backendApiUrl: "https://localhost:7114"
+  backendApiUrl: "https://localhost:7114",
+  bypassAuth: true
 }
 
 export const googleOpenIdConfig = {

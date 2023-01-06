@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import * as moment from 'moment';
 import { Category } from 'src/app/entities/category';
 
 @Component({
@@ -26,7 +27,7 @@ export class EditCashMovementDialogComponent {
       categoryId: new FormControl(data.cashMovement.categoryId, [
         Validators.required,
       ]),
-      date: new FormControl(new Date(), [Validators.required]),
+      date: new FormControl(moment(data.cashMovement.date, "ddd MMM DD YYYY HH:mm:ss"), [Validators.required]),
     });
   }
 

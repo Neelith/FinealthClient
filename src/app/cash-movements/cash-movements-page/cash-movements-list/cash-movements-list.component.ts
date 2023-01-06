@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { CashMovement } from 'src/app/entities/cash-movement';
 import { Category } from 'src/app/entities/category';
 
@@ -8,29 +9,43 @@ import { Category } from 'src/app/entities/category';
   styleUrls: ['./cash-movements-list.component.scss'],
 })
 export class CashMovementsListComponent {
-
   @Output() onDeleteCashMovementEvent = new EventEmitter<number>();
   @Output() onEditCashMovementEvent = new EventEmitter<CashMovement>();
   @Output() onAddCashMovementEvent = new EventEmitter();
+  @Output() onSearchCashMovementsEvent = new EventEmitter();
+  @Output() onReloadCashMovementsEvent = new EventEmitter();
 
-  @Input() cashMovementList : CashMovement[] = [];
-  @Input() categories : Category[] = [];
+  @Input() cashMovementList$!: Observable<CashMovement[]>;
+  @Input() categories: Category[] = [];
+  @Input() isCashMovementSearchFiltered!: boolean;
 
-  onDeleteCashMovement(cashMovementId : number){
+  constructor() {}
+
+  onDeleteCashMovement(cashMovementId: number) {
     this.onDeleteCashMovementEvent.emit(cashMovementId);
   }
 
-  onEditCashMovement(cashMovement : CashMovement){
+  onEditCashMovement(cashMovement: CashMovement) {
     this.onEditCashMovementEvent.emit(cashMovement);
   }
 
-  onAddCashMovement(){
+  onAddCashMovement() {
     this.onAddCashMovementEvent.emit();
   }
 
-  getCategorySrcPath(categoryId : number) : string{
-    const index = this.categories.findIndex(category => category.categoryId === categoryId);
-    return this.categories[index].iconUrl;
+  onSearchCashMovements(data: any) {
+    this.onSearchCashMovementsEvent.emit(data);
   }
 
+  onReloadCashMovements() {
+    this.onReloadCashMovementsEvent.emit();
+  }
+
+  getCategoryById(categoryId: number): Category {
+    const index = this.categories.findIndex(
+      (category) => category.categoryId === categoryId
+    );
+
+    return this.categories[index];
+  }
 }

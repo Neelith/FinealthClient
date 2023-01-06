@@ -1,28 +1,30 @@
-<div class="add-cashMovement-container">
-  <button
-    class="add-cashMovement-button"
-    mat-icon-button
-    color="primary"
-    aria-label="Edit button"
-    (click)="onAddCashMovement()"
-  >
-    <mat-icon>add_circle</mat-icon>
-  </button>
-</div>
+<app-cash-movements-list-toolbar
+  (onAddCashMovementEvent)="onAddCashMovement()"
+  (onSearchCashMovementsEvent)="onSearchCashMovements($event)"
+  (onReloadCashMovementsEvent)="onReloadCashMovements()"
+  [categories]="this.categories"
+  [isCashMovementSearchFiltered]="this.isCashMovementSearchFiltered"
+></app-cash-movements-list-toolbar>
 
 <mat-grid-list cols="1" rowHeight="fit" class="external-grid-list">
   <mat-grid-list
-    cols="5"
+    cols="6"
     rowHeight="100"
-    *ngFor="let cashMovement of cashMovementList"
+    *ngFor="let cashMovement of cashMovementList$ | async"
   >
     <mat-grid-tile>
       <img
         class="category-image"
         matListItemAvatar
-        [src]="getCategorySrcPath(cashMovement.categoryId)"
+        [src]="getCategoryById(cashMovement.categoryId).iconUrl"
         alt="cash movement icon"
     /></mat-grid-tile>
+
+    <mat-grid-tile>
+      <p>
+        {{ getCategoryById(this.cashMovement.categoryId).name }}
+      </p></mat-grid-tile
+    >
 
     <mat-grid-tile>
       <p class="date">

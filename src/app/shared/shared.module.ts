@@ -15,9 +15,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {
+  MatMomentDateModule,
+  MAT_MOMENT_DATE_FORMATS,
+} from '@angular/material-moment-adapter';
+import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientService } from './services/http-client.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -39,7 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    HttpClientModule
+    MatMenuModule,
+    HttpClientModule,
   ],
   exports: [
     NavbarComponent,
@@ -60,8 +66,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    HttpClientModule
+    MatMenuModule,
+    HttpClientModule,
   ],
-  providers: [HttpClientService],
+  providers: [
+    HttpClientService,
+    { provide: MAT_DATE_LOCALE, useValue: 'it' },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+  ],
 })
 export class SharedModule {}
