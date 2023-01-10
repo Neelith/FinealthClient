@@ -10,6 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { PersistanceModule } from './persistance/persistance.module';
 import { CategoriesModule } from './categories/categories.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { GraphsModule } from './graphs/graphs.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     DialogsModule,
     PersistanceModule,
     CategoriesModule,
-    DashboardModule
+    DashboardModule,
+    GraphsModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
