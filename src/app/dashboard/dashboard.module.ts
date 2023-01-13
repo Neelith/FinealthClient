@@ -4,12 +4,14 @@ import { SharedModule } from '../shared/shared.module';
 import { PersistanceModule } from '../persistance/persistance.module';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { GraphsModule } from '../graphs/graphs.module';
+import { CategoryChartComponent } from './dashboard-page/category-chart/category-chart.component';
 
 
 
 @NgModule({
   declarations: [
-    DashboardPageComponent
+    DashboardPageComponent,
+    CategoryChartComponent
   ],
   imports: [
     CommonModule,
