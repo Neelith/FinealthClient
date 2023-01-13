@@ -32,18 +32,13 @@ export class CategoryChartComponent implements OnChanges {
   }
 
   options: EChartsOption = {
-    color:[
-      '#00A393',
-      '#008F81',
-      '#007A6E',
-      '#00665C'
-    ],
+    color: ['#00A393', '#008F81', '#007A6E', '#00665C'],
     title: {
       left: '50%',
       top: '5%',
       text: 'Dove sono finiti i miei soldi?',
       subtext: '',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     tooltip: {
       trigger: 'item',
@@ -79,7 +74,7 @@ export class CategoryChartComponent implements OnChanges {
     legend: {
       align: 'auto',
       bottom: 10,
-      data: []
+      data: [],
     },
     calculable: true,
   };
@@ -97,9 +92,11 @@ export class CategoryChartComponent implements OnChanges {
   getCategoryGraphData() {
     return this.categories
       .map((category) => {
-        let categoryCashMovements = this.cashMovements.filter(
-          (cashMovement) => cashMovement.categoryId === category.categoryId
-        );
+        let categoryCashMovements = this.cashMovements
+          .filter(
+            (cashMovement) => cashMovement.categoryId === category.categoryId
+          )
+          .filter((cashMovement) => cashMovement.amount < 0);
         let totalAmount = categoryCashMovements.reduce(
           (sum, cashMovement) => sum + Math.abs(cashMovement.amount),
           0
@@ -109,9 +106,7 @@ export class CategoryChartComponent implements OnChanges {
           name: category.name,
         };
       })
-      .filter((data) => data.value > 0)
-      //TODO: passargli le categorie da filtrare
-      .filter(data => data.name !== 'Stipendio')
+      .filter((data) => data.value !== 0)
       .sort((a, b) => a.value - b.value);
   }
 }
