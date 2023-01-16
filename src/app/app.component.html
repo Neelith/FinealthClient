@@ -5,28 +5,27 @@
     #drawer
     mode="side"
     class="drawer"
-    disableClose="true"
     [opened]="true"
   >
-  <mat-nav-list class="sidenav-list">
+    <mat-nav-list class="sidenav-list">
+      <mat-list-item class="sidenav-list-item" (click)="onHomeIconClick()">
+        <mat-icon color="primary">home</mat-icon>
+        <p>HOME</p>
+      </mat-list-item>
 
-    <mat-list-item class="sidenav-list-item" (click)="onHomeIconClick()">
-      <mat-icon color="primary">home</mat-icon>
-      <p>HOME</p>
-    </mat-list-item>
+      <mat-list-item class="sidenav-list-item" (click)="onMovementsIconClick()">
+        <mat-icon color="primary">attach_money</mat-icon>
+        <p>MOVIMENTI</p>
+      </mat-list-item>
 
-    <mat-list-item class="sidenav-list-item" (click)="onMovementsIconClick()">
-      <mat-icon color="primary">attach_money</mat-icon>
-      <p>MOVIMENTI</p>
-    </mat-list-item>
-
-    <mat-list-item class="sidenav-list-item" (click)="onCategoriesIconClick()">
-      <mat-icon color="primary">list</mat-icon>
-      <p>CATEGORIE</p>
-    </mat-list-item>
-
-  </mat-nav-list>
-
+      <mat-list-item
+        class="sidenav-list-item"
+        (click)="onCategoriesIconClick()"
+      >
+        <mat-icon color="primary">list</mat-icon>
+        <p>CATEGORIE</p>
+      </mat-list-item>
+    </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>
