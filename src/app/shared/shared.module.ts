@@ -23,6 +23,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientService } from './services/http-client.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -45,6 +46,7 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
     MatDatepickerModule,
     MatMomentDateModule,
     MatMenuModule,
+    MatSidenavModule,
     HttpClientModule,
   ],
   exports: [
@@ -67,6 +69,7 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
     MatDatepickerModule,
     MatMomentDateModule,
     MatMenuModule,
+    MatSidenavModule,
     HttpClientModule,
   ],
   providers: [

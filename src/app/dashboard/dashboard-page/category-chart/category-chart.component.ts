@@ -13,25 +13,7 @@ export class CategoryChartComponent implements OnChanges {
   @Input() categories: Category[] = [];
   inputDataValid: boolean = false;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.inputDataValid =
-      this.cashMovements &&
-      this.cashMovements.length > 0 &&
-      this.categories &&
-      this.categories.length > 0
-        ? true
-        : false;
-
-    if (this.inputDataValid) {
-      let categoryGraphData = this.getCategoryGraphData();
-      //@ts-ignore
-      this.options.series[0].data = categoryGraphData;
-      //@ts-ignore
-      this.options.legend.data = this.getCategoryNames();
-    }
-  }
-
-  options: EChartsOption = {
+  categoryChartOptions: EChartsOption = {
     color: ['#00A393', '#008F81', '#007A6E', '#00665C'],
     title: {
       left: '50%',
@@ -39,6 +21,7 @@ export class CategoryChartComponent implements OnChanges {
       text: 'Dove sono finiti i miei soldi?',
       subtext: '',
       textAlign: 'center',
+      textStyle: { color: '#00A393' }
     },
     tooltip: {
       trigger: 'item',
@@ -79,28 +62,38 @@ export class CategoryChartComponent implements OnChanges {
     calculable: true,
   };
 
-  getCategoryNames(): string[] | undefined {
-    let results;
+  ngOnChanges(changes: SimpleChanges): void {
+    this.inputDataValid =
+      this.cashMovements &&
+      this.cashMovements.length > 0 &&
+      this.categories &&
+      this.categories.length > 0
+        ? true
+        : false;
 
     if (this.inputDataValid) {
-      results = this.categories.map((category) => category.name);
+      let categoryGraphData = this.getCategoryGraphData();
+      //@ts-ignore
+      this.categoryChartOptions.series[0].data = categoryGraphData;
+      //@ts-ignore
+      this.categoryChartOptions.legend.data = categoryGraphData.map((data) => data.name);
     }
-
-    return results;
   }
 
   getCategoryGraphData() {
     return this.categories
       .map((category) => {
-        let categoryCashMovements = this.cashMovements
-          .filter(
-            (cashMovement) => cashMovement.categoryId === category.categoryId
-          )
-          .filter((cashMovement) => cashMovement.amount < 0);
+        let categoryCashMovements = this.cashMovements.filter(
+          (cashMovement) =>
+            cashMovement.categoryId === category.categoryId &&
+            cashMovement.amount < 0
+        );
+
         let totalAmount = categoryCashMovements.reduce(
           (sum, cashMovement) => sum + Math.abs(cashMovement.amount),
           0
         );
+
         return {
           value: totalAmount,
           name: category.name,

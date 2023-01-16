@@ -1,17 +1,7 @@
 <mat-toolbar color="primary">
-  <span>Finealth</span>
+  <span (click)="onHomeIconClick()" class="navbar-title">Finealth</span>
   <span class="spacer"></span>
-  <button mat-icon-button aria-label="icon-button with home icon" (click)="onHomeIconClick()">
-    <mat-icon color="primary">home</mat-icon>
-  </button>
   <button mat-icon-button aria-label="icon-button with login icon" (click)="onAccountIconClick()">
     <mat-icon color="primary">person</mat-icon>
   </button>
-  <button mat-icon-button aria-label="icon-button with menu icon" [matMenuTriggerFor]="menu">
-    <mat-icon color="primary">menu</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="onMovementsIconClick()">Movimenti</button>
-    <button mat-menu-item (click)="onCategoriesIconClick()">Categorie</button>
-  </mat-menu>
 </mat-toolbar>

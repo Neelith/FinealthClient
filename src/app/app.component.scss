@@ -1,0 +1,53 @@
+.drawer-container{
+  background-color: white;
+  height: 100%;
+}
+
+.drawer-button{
+  width: 100%;
+  background-color: #009688;
+  color: white;
+  border: 0px;
+  min-height: 50px;
+  cursor: pointer;
+  padding: 0px 16px;
+}
+
+.drawer-button:hover{
+  background-color: #4db6ac;
+}
+
+.sidenav-list{
+  padding: 0px;
+  width: 60px;
+  transition: width 0.1s;
+}
+
+.sidenav-list-item{
+  padding: 0px;
+  width: 100%;
+  background-color: #009688;
+  height: 50px;
+  padding:8px;
+}
+
+.sidenav-list-item p{
+  display: inline-block;
+  visibility: hidden;
+  margin: 0px 16px;
+}
+
+.sidenav-list-item mat-icon{
+  line-height: 35px;
+  margin-left: 10px;
+}
+
+.drawer:hover {
+  .sidenav-list {
+    width: 100%;
+  }
+  .sidenav-list-item p{
+    visibility: visible;
+    color: white;
+  }
+}
