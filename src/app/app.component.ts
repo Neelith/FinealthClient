@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Finealth';
   subscription: Subscription = new Subscription();
-  isDrawerOpen: boolean = false;
   showSideNav: boolean = false;
 
   constructor(private router: Router) {}
