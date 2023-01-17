@@ -26,3 +26,17 @@
 .delete-button:hover{
   background-color: rgb(223, 20, 20);
 }
+
+.table-container{
+  max-width: 70%;
+  margin-left: 15%;
+}
+
+.table{
+  border: 1px solid lightgray;
+}
+
+table td, table th {
+  padding: 24px 8px;
+  width:5%;
+}

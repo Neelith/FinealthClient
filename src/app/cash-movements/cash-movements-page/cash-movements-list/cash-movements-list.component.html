@@ -6,67 +6,82 @@
   [isCashMovementSearchFiltered]="this.isCashMovementSearchFiltered"
 ></app-cash-movements-list-toolbar>
 
-<mat-grid-list cols="1" rowHeight="fit" class="external-grid-list">
-  <mat-grid-list
-    cols="6"
-    rowHeight="100"
-    *ngFor="let cashMovement of cashMovementList$ | async"
-  >
-    <mat-grid-tile>
-      <img
-        class="category-image"
-        matListItemAvatar
-        [src]="getCategoryById(cashMovement.categoryId).iconUrl"
-        alt="cash movement icon"
-    /></mat-grid-tile>
+<div class="table-container">
+  <table mat-table [dataSource]="cashMovementList$" class="table">
+    <!-- Category Img Column -->
+    <ng-container matColumnDef="categoryImg">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let cashMovement">
+        <img
+          class="category-image"
+          matListItemAvatar
+          [src]="getCategoryById(cashMovement.categoryId).iconUrl"
+          alt="cash movement icon"
+        />
+      </td>
+    </ng-container>
 
-    <mat-grid-tile>
-      <p>
+    <!-- Category Column -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let cashMovement">
         {{ getCategoryById(this.cashMovement.categoryId).name }}
-      </p></mat-grid-tile
-    >
+      </td>
+    </ng-container>
 
-    <mat-grid-tile>
-      <p class="date">
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let cashMovement">
         {{ cashMovement.date | date : "dd MMM" }}
-      </p></mat-grid-tile
-    >
+      </td>
+    </ng-container>
 
-    <mat-grid-tile>
-      <p>{{ cashMovement.description }}</p></mat-grid-tile
-    >
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let cashMovement">
+        {{ cashMovement.description }}
+      </td>
+    </ng-container>
 
-    <mat-grid-tile
-      ><p class="amount">
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let cashMovement">
         {{ cashMovement.amount | currency : "EUR" }}
-      </p></mat-grid-tile
-    >
+      </td>
+    </ng-container>
 
-    <mat-grid-tile>
-      <button color="primary" mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button
-          mat-menu-item
-          aria-label="Edit button"
-          (click)="onEditCashMovement(cashMovement)"
-        >
-          <mat-icon class="theme-color">settings</mat-icon>
-          <span>Modifica</span>
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let cashMovement">
+        <button color="primary" mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
         </button>
-        <button
-          mat-menu-item
-          aria-label="Edit button"
-          class="delete-button"
-          (click)="onDeleteCashMovement(cashMovement.cashMovementId)"
-        >
-          <mat-icon class="delete-color">delete</mat-icon>
-          <span class="delete-color">Elimina</span>
-        </button>
-      </mat-menu>
-    </mat-grid-tile>
+        <mat-menu #menu="matMenu">
+          <button
+            mat-menu-item
+            aria-label="Edit button"
+            (click)="onEditCashMovement(cashMovement)"
+          >
+            <mat-icon class="theme-color">settings</mat-icon>
+            <span>Modifica</span>
+          </button>
+          <button
+            mat-menu-item
+            aria-label="Edit button"
+            class="delete-button"
+            (click)="onDeleteCashMovement(cashMovement.cashMovementId)"
+          >
+            <mat-icon class="delete-color">delete</mat-icon>
+            <span class="delete-color">Elimina</span>
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
 
-    <mat-divider></mat-divider>
-  </mat-grid-list>
-</mat-grid-list>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
