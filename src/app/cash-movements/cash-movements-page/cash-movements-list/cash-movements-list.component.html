@@ -43,22 +43,28 @@
     >
 
     <mat-grid-tile>
-      <button
-        mat-icon-button
-        color="primary"
-        aria-label="Edit button"
-        (click)="onEditCashMovement(cashMovement)"
-      >
-        <mat-icon>settings</mat-icon>
+      <button color="primary" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
       </button>
-      <button
-        mat-icon-button
-        color="primary"
-        aria-label="Edit button"
-        (click)="onDeleteCashMovement(cashMovement.cashMovementId)"
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
+      <mat-menu #menu="matMenu">
+        <button
+          mat-menu-item
+          aria-label="Edit button"
+          (click)="onEditCashMovement(cashMovement)"
+        >
+          <mat-icon class="theme-color">settings</mat-icon>
+          <span>Modifica</span>
+        </button>
+        <button
+          mat-menu-item
+          aria-label="Edit button"
+          class="delete-button"
+          (click)="onDeleteCashMovement(cashMovement.cashMovementId)"
+        >
+          <mat-icon class="delete-color">delete</mat-icon>
+          <span class="delete-color">Elimina</span>
+        </button>
+      </mat-menu>
     </mat-grid-tile>
 
     <mat-divider></mat-divider>

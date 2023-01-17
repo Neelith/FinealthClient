@@ -1,6 +1,6 @@
 <mat-toolbar>
   <mat-form-field appearance="fill">
-    <mat-label>Enter a date range</mat-label>
+    <mat-label>Scegli un intervallo di date</mat-label>
     <mat-date-range-input [rangePicker]="picker" [max]="endDateValue">
       <input matStartDate placeholder="Start date" [formControl]="startDate" />
       <input matEndDate placeholder="End date" [formControl]="endDate" />
@@ -10,7 +10,7 @@
   </mat-form-field>
   <span class="spacer"></span>
   <mat-form-field appearance="fill">
-    <mat-label>Select category</mat-label>
+    <mat-label>Seleziona la categoria</mat-label>
     <mat-select [(value)]="selectedCategory">
       <mat-option [value]="this.allCategory">{{
         this.allCategory.name
