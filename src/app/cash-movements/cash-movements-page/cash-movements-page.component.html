@@ -1,10 +1,12 @@
-<app-cash-movements-list
-  [cashMovementList$]="this.cashMovementList$"
-  [categories]="this.categories"
-  [isCashMovementSearchFiltered]="this.isCashMovementSearchFiltered"
-  (onDeleteCashMovementEvent)="onDeleteCashMovement($event)"
-  (onEditCashMovementEvent)="onEditCashMovement($event)"
-  (onAddCashMovementEvent)="onAddCashMovement()"
-  (onSearchCashMovementsEvent)="onSearchCashMovements($event)"
-  (onReloadCashMovementsEvent)="onReloadCashMovements()"
-></app-cash-movements-list>
+<div class="main-content">
+  <app-cash-movements-list
+    [cashMovementList$]="this.cashMovementList$"
+    [categories]="this.categories"
+    [isCashMovementSearchFiltered]="this.isCashMovementSearchFiltered"
+    (onDeleteCashMovementEvent)="onDeleteCashMovement($event)"
+    (onEditCashMovementEvent)="onEditCashMovement($event)"
+    (onAddCashMovementEvent)="onAddCashMovement()"
+    (onSearchCashMovementsEvent)="onSearchCashMovements($event)"
+    (onReloadCashMovementsEvent)="onReloadCashMovements()"
+  ></app-cash-movements-list>
+</div>

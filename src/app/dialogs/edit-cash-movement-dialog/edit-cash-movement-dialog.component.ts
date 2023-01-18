@@ -11,7 +11,7 @@ import { Category } from 'src/app/entities/category';
 })
 export class EditCashMovementDialogComponent {
   categories: Category[];
-  buttonText: string = 'Edit';
+  buttonText: string = 'Modifica';
   form: FormGroup;
 
   constructor(

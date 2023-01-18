@@ -10,7 +10,7 @@ import { Category } from 'src/app/entities/category';
 })
 export class AddCashMovementDialogComponent {
   categories: Category[];
-  buttonText: string = 'Add';
+  buttonText: string = 'Aggiungi';
   form: FormGroup;
 
   constructor(
