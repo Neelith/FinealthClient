@@ -1,2 +1,7 @@
-<app-login-form (onSubmitEvent)="onSubmit($event)"></app-login-form>
-<app-social-login (onHandleCredentialResponseFromGoogle)="handleCredentialResponseFromGoogle($event)"></app-social-login>
+<div class="main-content">
+  <app-login-form (onSubmitEvent)="onSubmit($event)"></app-login-form>
+  <app-social-login
+    (onHandleCredentialResponseFromGoogle)="
+      handleCredentialResponseFromGoogle($event)"
+  ></app-social-login>
+</div>
