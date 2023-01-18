@@ -6,74 +6,72 @@
   [isCashMovementSearchFiltered]="this.isCashMovementSearchFiltered"
 ></app-cash-movements-list-toolbar>
 
-<div class="table-container">
-  <table mat-table [dataSource]="cashMovementList$" class="table">
-    <!-- Category Img Column -->
-    <ng-container matColumnDef="categoryImg">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let cashMovement">
-        <img
-          class="category-image"
-          matListItemAvatar
-          [src]="getCategoryById(cashMovement.categoryId).iconUrl"
-          alt="cash movement icon"
-        />
-      </td>
-    </ng-container>
+<table mat-table [dataSource]="cashMovementList$" class="table">
+  <!-- Category Img Column -->
+  <ng-container matColumnDef="categoryImg">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let cashMovement">
+      <img
+        class="category-image"
+        matListItemAvatar
+        [src]="getCategoryById(cashMovement.categoryId).iconUrl"
+        alt="cash movement icon"
+      />
+    </td>
+  </ng-container>
 
-    <!-- Description Column -->
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let cashMovement">
-        <div class="description-content">
-          <span class="description-subtitle">{{
-            getCategoryById(this.cashMovement.categoryId).name
-          }}</span>
-          <span class="description-text">{{ cashMovement.description }}</span>
-          <span class="description-subtitle">{{
-            cashMovement.date | date : "dd MMM"
-          }}</span>
-        </div>
-      </td>
-    </ng-container>
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let cashMovement">
+      <div class="description-content">
+        <span class="description-subtitle">{{
+          getCategoryById(this.cashMovement.categoryId).name
+        }}</span>
+        <span class="description-text">{{ cashMovement.description }}</span>
+        <span class="description-subtitle">{{
+          cashMovement.date | date : "dd MMM"
+        }}</span>
+      </div>
+    </td>
+  </ng-container>
 
-    <!-- Amount Column -->
-    <ng-container matColumnDef="amount">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let cashMovement">
-        {{ cashMovement.amount | currency : "EUR" }}
-      </td>
-    </ng-container>
+  <!-- Amount Column -->
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let cashMovement">
+      {{ cashMovement.amount | currency : "EUR" }}
+    </td>
+  </ng-container>
 
-    <!-- Actions Column -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let cashMovement">
-        <button color="primary" mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let cashMovement">
+      <button color="primary" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button
+          mat-menu-item
+          aria-label="Edit button"
+          (click)="onEditCashMovement(cashMovement)"
+        >
+          <mat-icon class="theme-color">settings</mat-icon>
+          <span>Modifica</span>
         </button>
-        <mat-menu #menu="matMenu">
-          <button
-            mat-menu-item
-            aria-label="Edit button"
-            (click)="onEditCashMovement(cashMovement)"
-          >
-            <mat-icon class="theme-color">settings</mat-icon>
-            <span>Modifica</span>
-          </button>
-          <button
-            mat-menu-item
-            aria-label="Edit button"
-            class="delete-button"
-            (click)="onDeleteCashMovement(cashMovement.cashMovementId)"
-          >
-            <mat-icon class="delete-color">delete</mat-icon>
-            <span class="delete-color">Elimina</span>
-          </button>
-        </mat-menu>
-      </td>
-    </ng-container>
+        <button
+          mat-menu-item
+          aria-label="Edit button"
+          class="delete-button"
+          (click)="onDeleteCashMovement(cashMovement.cashMovementId)"
+        >
+          <mat-icon class="delete-color">delete</mat-icon>
+          <span class="delete-color">Elimina</span>
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
 
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-</div>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

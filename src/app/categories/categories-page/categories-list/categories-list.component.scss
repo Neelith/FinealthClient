@@ -1,12 +1,17 @@
-.category-image{
+.category-image {
   max-width: 48px;
   max-height: 48px;
 }
 
-.external-grid-list{
-  border-left: 1px solid lightgray;
-  border-right: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
-  margin-left: 15%;
-  margin-right: 15%;
+.theme-color {
+  color: #009688;
+}
+
+.table {
+  border: 1px solid lightgray;
+}
+
+table td,
+table th {
+  padding: 16px 16px;
 }
