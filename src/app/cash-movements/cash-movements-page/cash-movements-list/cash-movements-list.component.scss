@@ -3,40 +3,47 @@
   max-height: 48px;
 }
 
-.external-grid-list {
-  border-left: 1px solid lightgray;
-  border-right: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
-  margin-left: 15%;
-  margin-right: 15%;
-}
-
 .theme-color {
   color: #009688;
-}
-
-.delete-button{
-  background-color: red;
 }
 
 .delete-color {
   color: white;
 }
 
-.delete-button:hover{
+.delete-button {
+  background-color: red;
+}
+
+.delete-button:hover {
   background-color: rgb(223, 20, 20);
 }
 
-.table-container{
+.table-container {
   max-width: 70%;
   margin-left: 15%;
 }
 
-.table{
+.table {
   border: 1px solid lightgray;
 }
 
-table td, table th {
-  padding: 24px 8px;
-  width:5%;
+table td,
+table th {
+  padding: 16px 16px;
+}
+
+.description-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.description-subtitle {
+  font-weight: 200;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.description-text {
+  font-weight: 400;
 }

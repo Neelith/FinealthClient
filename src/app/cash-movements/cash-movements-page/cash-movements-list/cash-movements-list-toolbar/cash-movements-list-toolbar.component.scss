@@ -1,18 +1,15 @@
 mat-toolbar {
-  flex: 1 1 auto;
   margin-top: 5%;
   margin-left: 15%;
-  margin-right: 15%;
-  width: 70%;
-  height: 80px;
+  max-width: 70%;
   background-color: white;
   padding: 0;
 }
 
-.spacer{
-  width: 5px;
+mat-toolbar-row{
+  padding: 0;
 }
 
-.button-spacer{
-  flex: 1 1 auto;
+mat-form-field{
+  width: 270px;
 }

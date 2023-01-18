@@ -29,8 +29,6 @@ export class CashMovementsListComponent {
 
   displayedColumns: string[] = [
     'categoryImg',
-    'category',
-    'date',
     'description',
     'amount',
     'actions'
