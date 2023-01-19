@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EChartsOption, graphic } from 'echarts';
+import * as moment from 'moment';
 import { finalize, firstValueFrom, Subscription } from 'rxjs';
 import { CashMovement } from 'src/app/entities/cash-movement';
 import { Category } from 'src/app/entities/category';
@@ -15,6 +16,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   cashMovements: CashMovement[] = [];
   categories: Category[] = [];
+  isSearchFiltered: boolean = false;
 
   constructor(
     private categoryRepository: CategoryRepositoryService,
@@ -22,31 +24,36 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
-    // this.subscription.add(
-    //   this.cashMovementRepository
-    //     .getAllCashMovements()
-    //     .subscribe((cashMovements) => {
-    //       this.cashMovements = cashMovements;
-    //     })
-    // );
+    this.cashMovements = await this.getCashMovementsAsync();
+    this.categories = await this.getCategoriesAsync();
+  }
 
-    await firstValueFrom(
-      this.cashMovementRepository.getAllCashMovements()
-    ).then((cashMovements) => {
-      this.cashMovements = cashMovements;
+  async reloadCategoryChartData() {
+    this.isSearchFiltered = false;
+    this.cashMovements = await this.getCashMovementsAsync();
+    this.categories = await this.getCategoriesAsync();
+  }
+
+  async filterCategoryChartData(data: any) {
+    this.isSearchFiltered = true;
+    let startDateValue = moment(data.startDate.value);
+    let endDateValue = moment(data.endDate.value);
+    endDateValue.hours(23).minutes(59).seconds(59);
+
+    this.cashMovements = (await this.getCashMovementsAsync()).filter((cm) => {
+      const cashMovementDate = moment(cm.date);
+      return cashMovementDate.isBetween(startDateValue, endDateValue);
     });
 
-    // this.subscription.add(
-    //   this.categoryRepository.getAllCategories().subscribe((categories) => {
-    //     this.categories = categories;
-    //   })
-    // );
+    this.categories = await this.getCategoriesAsync();
+  }
 
-    await firstValueFrom(this.categoryRepository.getAllCategories()).then(
-      (categories) => {
-        this.categories = categories;
-      }
-    );
+  async getCashMovementsAsync() {
+    return firstValueFrom(this.cashMovementRepository.getAllCashMovements());
+  }
+
+  async getCategoriesAsync() {
+    return firstValueFrom(this.categoryRepository.getAllCategories());
   }
 
   ngOnDestroy(): void {
