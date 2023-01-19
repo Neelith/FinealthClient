@@ -6,7 +6,7 @@
   [isCashMovementSearchFiltered]="this.isCashMovementSearchFiltered"
 ></app-cash-movements-list-toolbar>
 
-<table mat-table [dataSource]="cashMovementList$" class="table">
+<table mat-table [dataSource]="cashMovementList$ | sortBy: 'date':'desc'" class="table">
   <!-- Category Img Column -->
   <ng-container matColumnDef="categoryImg">
     <th mat-header-cell *matHeaderCellDef></th>

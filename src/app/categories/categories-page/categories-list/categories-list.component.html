@@ -2,7 +2,7 @@
   (onAddCategoryEvent)="onAddCategory()"
 ></app-categories-list-toolbar>
 
-<table mat-table [dataSource]="categories$" class="table">
+<table mat-table [dataSource]="categories$ | sortBy: 'name' : 'asc' " class="table">
   <!-- Category Img Column -->
   <ng-container matColumnDef="categoryImg">
     <th mat-header-cell *matHeaderCellDef></th>

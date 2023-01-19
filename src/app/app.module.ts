@@ -24,7 +24,7 @@ import { GraphsModule } from './graphs/graphs.module';
     PersistanceModule,
     CategoriesModule,
     DashboardModule,
-    GraphsModule
+    GraphsModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

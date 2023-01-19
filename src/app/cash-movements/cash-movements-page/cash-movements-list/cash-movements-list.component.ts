@@ -1,13 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { Observable, of } from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CashMovement } from 'src/app/entities/cash-movement';
 import { Category } from 'src/app/entities/category';
 
@@ -31,7 +23,7 @@ export class CashMovementsListComponent {
     'categoryImg',
     'description',
     'amount',
-    'actions'
+    'actions',
   ];
 
   constructor() {}
