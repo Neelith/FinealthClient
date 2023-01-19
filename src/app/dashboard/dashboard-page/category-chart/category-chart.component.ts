@@ -5,7 +5,6 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { EChartsOption } from 'echarts';
 import { CashMovement } from 'src/app/entities/cash-movement';
 import { Category } from 'src/app/entities/category';
 import { EchartOptionsService } from 'src/app/graphs/services/echart-options.service';
