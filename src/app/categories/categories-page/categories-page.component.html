@@ -1,5 +1,7 @@
-<app-categories-list
-  [categories$]="this.categories$"
-  (onAddCategoryEvent)="onAddCategory()"
-  (onEditCategoryEvent)="onEditCategory($event)"
-></app-categories-list>
+<div class="main-content">
+  <app-categories-list
+    [categories$]="this.categories$"
+    (onAddCategoryEvent)="onAddCategory()"
+    (onEditCategoryEvent)="onEditCategory($event)"
+  ></app-categories-list>
+</div>

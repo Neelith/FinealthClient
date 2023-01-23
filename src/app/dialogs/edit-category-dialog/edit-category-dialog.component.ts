@@ -9,7 +9,7 @@ import { Category } from 'src/app/entities/category';
   styleUrls: ['./edit-category-dialog.component.scss'],
 })
 export class EditCategoryDialogComponent {
-  buttonText: string = 'Edit';
+  buttonText: string = 'Modifica';
   form: FormGroup;
   iconUrls: string[];
   categoryToEdit!: Category;

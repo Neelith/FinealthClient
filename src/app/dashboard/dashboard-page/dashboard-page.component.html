@@ -1,1 +1,9 @@
-<p>dashboard-page works!</p>
+<app-category-chart
+  [cashMovements]="this.cashMovements"
+  [categories]="this.categories"
+></app-category-chart>
+<app-category-chart-toolbar
+  [isSearchFiltered]="this.isSearchFiltered"
+  (onSearchEvent)="filterCategoryChartData($event)"
+  (onReloadEvent)="reloadCategoryChartData()"
+></app-category-chart-toolbar>

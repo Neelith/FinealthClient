@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CashMovement } from 'src/app/entities/cash-movement';
 import { Category } from 'src/app/entities/category';
 
@@ -18,6 +18,13 @@ export class CashMovementsListComponent {
   @Input() cashMovementList$!: Observable<CashMovement[]>;
   @Input() categories: Category[] = [];
   @Input() isCashMovementSearchFiltered!: boolean;
+
+  displayedColumns: string[] = [
+    'categoryImg',
+    'description',
+    'amount',
+    'actions',
+  ];
 
   constructor() {}
 

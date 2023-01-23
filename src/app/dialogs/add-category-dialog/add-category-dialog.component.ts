@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./add-category-dialog.component.scss'],
 })
 export class AddCategoryDialogComponent {
-  buttonText: string = 'Add';
+  buttonText: string = 'Aggiungi';
   form: FormGroup;
   iconUrls: string[];
 

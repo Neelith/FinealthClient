@@ -11,6 +11,11 @@ export class CategoriesListComponent {
   @Input() categories$!: Observable<Category[]>;
   @Output() onAddCategoryEvent = new EventEmitter();
   @Output() onEditCategoryEvent = new EventEmitter<Category>();
+  displayedColumns: string[] = [
+    'categoryImg',
+    'description',
+    'actions'
+  ];
 
   onAddCategory() {
     this.onAddCategoryEvent.emit();

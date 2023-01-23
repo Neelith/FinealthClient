@@ -2,35 +2,47 @@
   (onAddCategoryEvent)="onAddCategory()"
 ></app-categories-list-toolbar>
 
-<mat-grid-list cols="1" rowHeight="fit" class="external-grid-list">
-  <mat-grid-list
-    cols="3"
-    rowHeight="100"
-    *ngFor="let category of categories$ | async"
-  >
-    <mat-grid-tile>
+<table mat-table [dataSource]="categories$ | sortBy: 'name' : 'asc' " class="table">
+  <!-- Category Img Column -->
+  <ng-container matColumnDef="categoryImg">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let category">
       <img
         class="category-image"
         matListItemAvatar
         [src]="category.iconUrl"
         alt="category icon"
-    /></mat-grid-tile>
+      />
+    </td>
+  </ng-container>
 
-    <mat-grid-tile>
-      <p>{{ category.name }}</p></mat-grid-tile
-    >
+  <!-- Name Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let category">
+      <span>{{ category.name }}</span>
+    </td>
+  </ng-container>
 
-    <mat-grid-tile>
-      <button
-        mat-icon-button
-        color="primary"
-        aria-label="Edit button"
-        (click)="onEditCategory(category)"
-      >
-        <mat-icon>settings</mat-icon>
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let category">
+      <button color="primary" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
       </button>
-    </mat-grid-tile>
+      <mat-menu #menu="matMenu">
+        <button
+          mat-menu-item
+          aria-label="Edit button"
+          (click)="onEditCategory(category)"
+        >
+          <mat-icon class="theme-color">settings</mat-icon>
+          <span>Modifica</span>
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
 
-    <mat-divider></mat-divider>
-  </mat-grid-list>
-</mat-grid-list>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

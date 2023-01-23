@@ -23,9 +23,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientService } from './services/http-client.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
+import { SortByPipe } from './pipes/sort-by.pipe';
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, SortByPipe],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -45,6 +47,7 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
     MatDatepickerModule,
     MatMomentDateModule,
     MatMenuModule,
+    MatTableModule,
     HttpClientModule,
   ],
   exports: [
@@ -67,7 +70,9 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
     MatDatepickerModule,
     MatMomentDateModule,
     MatMenuModule,
+    MatTableModule,
     HttpClientModule,
+    SortByPipe
   ],
   providers: [
     HttpClientService,
