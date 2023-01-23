@@ -6,6 +6,7 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { GraphsModule } from '../graphs/graphs.module';
 import { CategoryChartComponent } from './dashboard-page/category-chart/category-chart.component';
 import { CategoryChartToolbarComponent } from './dashboard-page/category-chart/category-chart-toolbar/category-chart-toolbar.component';
+import { IncomeExpenseChartComponent } from './dashboard-page/income-expense-chart/income-expense-chart.component';
 
 
 
@@ -13,7 +14,8 @@ import { CategoryChartToolbarComponent } from './dashboard-page/category-chart/c
   declarations: [
     DashboardPageComponent,
     CategoryChartComponent,
-    CategoryChartToolbarComponent
+    CategoryChartToolbarComponent,
+    IncomeExpenseChartComponent
   ],
   imports: [
     CommonModule,
