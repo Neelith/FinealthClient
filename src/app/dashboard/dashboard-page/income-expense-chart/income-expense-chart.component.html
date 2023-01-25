@@ -2,4 +2,6 @@
   echarts
   [autoResize]="true"
   [options]="incomeExpenseChartOptions"
+  [merge]="incomeExpenseChartUpdateOptions"
+  *ngIf="this.inputDataValid"
 ></div>
