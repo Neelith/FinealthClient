@@ -11,6 +11,7 @@ import { PersistanceModule } from './persistance/persistance.module';
 import { CategoriesModule } from './categories/categories.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { GraphsModule } from './graphs/graphs.module';
+import { HttpModule } from './http/http.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { GraphsModule } from './graphs/graphs.module';
     CategoriesModule,
     DashboardModule,
     GraphsModule,
+    HttpModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

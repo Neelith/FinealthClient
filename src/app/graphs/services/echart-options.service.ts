@@ -38,7 +38,7 @@ export class EchartOptionsService {
             ${param.seriesName}: ${param.data} (${
             param.seriesName === 'Entrate'
               ? '100'
-              : ((param.data / income) * 100).toFixed(2)
+              : (Math.abs((param.data / income) * 100)).toFixed(2)
           }%)<br/>
           `;
         });
@@ -208,6 +208,7 @@ export class EchartOptionsService {
       risparmi[key] = entrate[key] + uscite[key];
     });
 
+    //sorting the data to better visualize it
     xAxis.data.sort((a, b) => {
       const aData = a.split('-');
       const bData = b.split('-');

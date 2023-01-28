@@ -25,7 +25,9 @@ export class AddEditCategoryFormComponent {
     iconLabel = iconLabel.replace(/[-_]/g, ' ');
 
     // Remove the word 'icon' from the label
+    iconLabel = iconLabel.replace(/icons8/g, '');
     iconLabel = iconLabel.replace(/icon/g, '');
+    iconLabel = iconLabel.replace(/64/g, '');
 
     return iconLabel;
   }
